@@ -1,0 +1,3 @@
+HelloPerson = "Hello {{.Name}}"
+PageNotFound = "Page not found"
+MethodNotAllowed = "Method not allowed"
