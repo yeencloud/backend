@@ -10,6 +10,7 @@ import (
 	"github.com/rs/zerolog/log"
 	"net"
 	"net/http"
+	"os"
 )
 
 type ServiceHTTPServer struct {
@@ -29,6 +30,10 @@ func NewServiceHttpServer(ucs usecases.Usecases, config config.HTTPConfig, trans
 
 	gin.DebugPrintRouteFunc = func(httpMethod, absolutePath, handlerName string, nuHandlers int) {
 		log.Debug().Str("Method", httpMethod).Str("Handler", handlerName).Int("Handlers", nuHandlers).Msg(absolutePath)
+	}
+
+	if os.Getenv("ENV") == "production" || os.Getenv("ENV") == "prod" {
+		gin.SetMode(gin.ReleaseMode)
 	}
 
 	r := gin.New()

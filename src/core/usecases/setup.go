@@ -2,6 +2,7 @@ package usecases
 
 import (
 	"back/src/core/domain"
+	"fmt"
 	"github.com/davecgh/go-spew/spew"
 	"github.com/rs/zerolog/log"
 	"k8s.io/client-go/rest"
@@ -65,7 +66,7 @@ func (i interactor) steps() []domain.SetupStep {
 				if err != nil {
 					println(err.Error())
 				} else {
-					strcfg = config.String()
+					strcfg = fmt.Sprintf("%#v", config)
 				}
 
 				return []domain.SetupField{

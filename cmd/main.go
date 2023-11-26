@@ -62,13 +62,11 @@ func startTranslator() *i18n.Bundle {
 }
 
 func startLogger() {
-
 	isDev := os.Getenv("ENV") != "prod" && os.Getenv("ENV") != "production"
 
 	if isDev {
 		zerolog.SetGlobalLevel(zerolog.InfoLevel)
 	}
-
 	// Short caller (file:line)
 	zerolog.CallerMarshalFunc = func(pc uintptr, file string, line int) string {
 		if strings.HasPrefix(file, "/app/") {
@@ -103,6 +101,7 @@ func startLogger() {
 
 func initApp(c *cli.Context) *domain.ApplicationBundle {
 	cfg := initConfig(c)
+
 	startLogger()
 	i18n := startTranslator()
 
